@@ -2,10 +2,6 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
-      <!-- <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-store"></i>
-      </div>
-      <div class="sidebar-brand-text mx-3">ECOMMERCE</div> -->
       <img style="height: 50px;" alt="Southend" src="/images/logo.svg" >
     </a>
 
@@ -213,6 +209,48 @@
     <div class="sidebar-heading">
         General Settings
     </div>
+    <!-- BasicPage -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#basicPageCollapse" aria-expanded="true" aria-controls="basicPageCollapse">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Basic Pages</span>
+      </a>
+      <div id="basicPageCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#basicPageCollapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Basic Page Options:</h6>
+          <a class="collapse-item" href="{{route('basic-page.index')}}">Basic Pages List</a>
+          <a class="collapse-item" href="{{route('basic-page.create')}}">Add Basic Page</a>
+        </div>
+      </div>
+    </li>
+    <!-- Social -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#socialCollapse" aria-expanded="true" aria-controls="socialCollapse">
+        <i class="fas fa-fw fa-share"></i>
+        <span>Social</span>
+      </a>
+      <div id="socialCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#socialCollapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Social Options:</h6>
+          <a class="collapse-item" href="{{route('social.index')}}">Social List</a>
+          <a class="collapse-item" href="{{route('social.create')}}">Add Social</a>
+        </div>
+      </div>
+    </li>
+    <!-- Policy -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#policyCollapse" aria-expanded="true" aria-controls="policyCollapse">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Terms and Conditions</span>
+      </a>
+      <div id="policyCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#policyCollapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Policy Options:</h6>
+          <a class="collapse-item" href="{{route('policy.index')}}">Policies List</a>
+          <a class="collapse-item" href="{{route('policy.create')}}">Add Policy</a>
+        </div>
+      </div>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="{{route('coupon.index')}}">
           <i class="fas fa-table"></i>

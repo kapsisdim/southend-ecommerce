@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Banner;
+use App\Models\BasicPage;
 use Illuminate\Support\Str;
 
-class BannerController extends Controller
+class BasicPageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banner=Banner::orderBy('id','DESC')->paginate(10);
-        return view('backend.banner.index')->with('banners',$banner);
+        $basicPage=BasicPage::orderBy('id','DESC')->paginate(10);
+        return view('backend.basic-page.index')->with('basicPages',$basicPage);
     }
 
     /**
@@ -26,7 +26,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('backend.banner.create');
+        return view('backend.basic-page.create');
     }
 
     /**
@@ -42,24 +42,23 @@ class BannerController extends Controller
             'title'=>'string|required|max:50',
             'description'=>'string|nullable',
             'photo'=>'string|required',
-            'status'=>'required|in:active,inactive',
         ]);
         $data=$request->all();
         $slug=Str::slug($request->title);
-        $count=Banner::where('slug',$slug)->count();
+        $count=BasicPage::where('slug',$slug)->count();
         if($count>0){
             $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
         }
         $data['slug']=$slug;
         // return $slug;
-        $status=Banner::create($data);
+        $status=BasicPage::create($data);
         if($status){
-            request()->session()->flash('success','Banner successfully added');
+            request()->session()->flash('success','Basic Page successfully added');
         }
         else{
-            request()->session()->flash('error','Error occurred while adding banner');
+            request()->session()->flash('error','Error occurred while adding basic page');
         }
-        return redirect()->route('banner.index');
+        return redirect()->route('basic-page.index');
     }
 
     /**
@@ -81,8 +80,8 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        $banner=Banner::findOrFail($id);
-        return view('backend.banner.edit')->with('banner',$banner);
+        $basicPage=BasicPage::findOrFail($id);
+        return view('backend.basic-page.edit')->with('basicPage',$basicPage);
     }
 
     /**
@@ -94,29 +93,21 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $banner=Banner::findOrFail($id);
+        $banner=BasicPage::findOrFail($id);
         $this->validate($request,[
             'title'=>'string|required|max:50',
             'description'=>'string|nullable',
             'photo'=>'string|required',
-            'status'=>'required|in:active,inactive',
         ]);
         $data=$request->all();
-        // $slug=Str::slug($request->title);
-        // $count=Banner::where('slug',$slug)->count();
-        // if($count>0){
-        //     $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
-        // }
-        // $data['slug']=$slug;
-        // return $slug;
         $status=$banner->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Banner successfully updated');
+            request()->session()->flash('success','Basic Page successfully updated');
         }
         else{
-            request()->session()->flash('error','Error occurred while updating banner');
+            request()->session()->flash('error','Error occurred while updating basic page');
         }
-        return redirect()->route('banner.index');
+        return redirect()->route('basic-page.index');
     }
 
     /**
@@ -127,14 +118,15 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        $banner=Banner::findOrFail($id);
-        $status=$banner->delete();
+        $basicPage=BasicPage::findOrFail($id);
+        $status=$basicPage->delete();
         if($status){
-            request()->session()->flash('success','Banner successfully deleted');
+            request()->session()->flash('success','Basic Page successfully deleted');
         }
         else{
-            request()->session()->flash('error','Error occurred while deleting banner');
+            request()->session()->flash('error','Error occurred while deleting basic page');
         }
-        return redirect()->route('banner.index');
+        return redirect()->route('basic-page.index');
     }
+
 }

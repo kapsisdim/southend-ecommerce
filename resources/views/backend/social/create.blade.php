@@ -1,11 +1,11 @@
 @extends('backend.layouts.master')
-@section('title','Admin | Brand Create')
+@section('title','Admin | Social Create')
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Add Brand</h5>
+    <h5 class="card-header">Add Social</h5>
     <div class="card-body">
-      <form method="post" action="{{route('brand.store')}}">
+      <form method="post" action="{{route('social.store')}}">
         {{csrf_field()}}
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Title <span class="text-danger">*</span></label>
@@ -14,16 +14,19 @@
         <span class="text-danger">{{$message}}</span>
         @enderror
         </div>
-
         <div class="form-group">
-          <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
-          <select name="status" class="form-control">
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-          </select>
-          @error('status')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
+          <label for="inputLink" class="col-form-label">Link <span class="text-danger">*</span></label>
+        <input id="inputLink" type="text" name="link" placeholder="Enter link"  value="{{old('link')}}" class="form-control">
+        @error('link')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+        </div>
+        <div class="form-group">
+          <label for="inputIcon" class="col-form-label">Icon <span class="text-danger">*</span></label>
+        <input id="inputIcon" type="text" name="icon" placeholder="Enter icon"  value="{{old('icon')}}" class="form-control">
+        @error('icon')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
         </div>
         <div class="form-group mb-3">
           <button type="reset" class="btn btn-warning">Reset</button>

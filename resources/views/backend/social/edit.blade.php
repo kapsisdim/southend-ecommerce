@@ -1,29 +1,33 @@
 @extends('backend.layouts.master')
-@section('title','Admin | Brand Edit')
+@section('title','Admin | Social Edit')
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Edit Brand</h5>
+    <h5 class="card-header">Edit Social</h5>
     <div class="card-body">
-      <form method="post" action="{{route('brand.update',$brand->id)}}">
+      <form method="post" action="{{route('social.update',$social->id)}}">
         @csrf
         @method('PATCH')
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Title <span class="text-danger">*</span></label>
-        <input id="inputTitle" type="text" name="title" placeholder="Enter title"  value="{{$brand->title}}" class="form-control">
+        <input id="inputTitle" type="text" name="title" placeholder="Enter title"  value="{{$social->title}}" class="form-control">
         @error('title')
         <span class="text-danger">{{$message}}</span>
         @enderror
         </div>
         <div class="form-group">
-          <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
-          <select name="status" class="form-control">
-            <option value="active" {{(($brand->status=='active') ? 'selected' : '')}}>Active</option>
-            <option value="inactive" {{(($brand->status=='inactive') ? 'selected' : '')}}>Inactive</option>
-          </select>
-          @error('status')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
+          <label for="inputLink" class="col-form-label">Link <span class="text-danger">*</span></label>
+        <input id="inputLink" type="text" name="link" placeholder="Enter link"  value="{{$social->link}}" class="form-control">
+        @error('link')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+        </div>
+        <div class="form-group">
+          <label for="inputIcon" class="col-form-label">Icon <span class="text-danger">*</span></label>
+        <input id="inputIcon" type="text" name="icon" placeholder="Enter icon"  value="{{$social->icon}}" class="form-control">
+        @error('icon')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
         </div>
         <div class="form-group mb-3">
            <button class="btn btn-success" type="submit">Update</button>

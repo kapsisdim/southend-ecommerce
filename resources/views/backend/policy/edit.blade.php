@@ -1,27 +1,37 @@
 @extends('backend.layouts.master')
-@section('title','Admin | Brand Edit')
+@section('title','Admin | Policy Edit')
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Edit Brand</h5>
+    <h5 class="card-header">Edit Policy</h5>
     <div class="card-body">
-      <form method="post" action="{{route('brand.update',$brand->id)}}">
+      <form method="post" action="{{route('policy.update',$policy->id)}}">
         @csrf
         @method('PATCH')
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Title <span class="text-danger">*</span></label>
-        <input id="inputTitle" type="text" name="title" placeholder="Enter title"  value="{{$brand->title}}" class="form-control">
+        <input id="inputTitle" type="text" name="title" placeholder="Enter title"  value="{{$policy->title}}" class="form-control">
         @error('title')
         <span class="text-danger">{{$message}}</span>
         @enderror
         </div>
+
         <div class="form-group">
-          <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
-          <select name="status" class="form-control">
-            <option value="active" {{(($brand->status=='active') ? 'selected' : '')}}>Active</option>
-            <option value="inactive" {{(($brand->status=='inactive') ? 'selected' : '')}}>Inactive</option>
+          <label for="inputDesc" class="col-form-label">Description</label>
+          <textarea class="form-control" id="description" name="description">{{$policy->description}}</textarea>
+          @error('description')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+
+        <div class="form-group">
+          <label for="type" class="col-form-label">Type <span class="text-danger">*</span></label>
+          <select name="type" class="form-control">
+            <option value="privacy" {{(($policy->type=='privacy') ? 'selected' : '')}}>Privacy Policy</option>
+            <option value="terms" {{(($policy->type=='terms') ? 'selected' : '')}}>Terms and Conditions Policy</option>
+            <option value="cookies" {{(($policy->type=='cookies') ? 'selected' : '')}}>Cookies Policy</option>
           </select>
-          @error('status')
+          @error('type')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
