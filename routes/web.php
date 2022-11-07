@@ -60,6 +60,8 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::resource('/policy','PolicyController');
     // Basic Page
     Route::resource('/basic-page','BasicPageController');
+    // Social
+    Route::resource('/social','SocialController');
     // Message
     Route::resource('/message','MessageController');
     Route::get('/message/five','MessageController@messageFive')->name('messages.five');
