@@ -11,6 +11,7 @@
                                 <div class="nav-inner">
                                     <ul class="nav main-menu menu navbar-nav">
                                                 {{Helper::getHeaderCategory()}}
+                                                {{Helper::getHeaderCollection()}}
                                         <li class="{{Request::path()=='about-us' ? 'active' : ''}}"><a href="{{route('about-us')}}">ABOUT</a></li>
                                         <li class="{{Request::path()=='contact' ? 'active' : ''}}"><a href="{{route('contact')}}">CONTACT</a></li>
                                         <!-- <li class="{{Request::path()=='home' ? 'active' : ''}}"><a href="{{route('home')}}">Home</a></li>

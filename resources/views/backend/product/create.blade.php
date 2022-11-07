@@ -34,7 +34,7 @@
 
         <div class="form-group">
           <label for="is_featured">Is Featured</label><br>
-          <input type="checkbox" name='is_featured' id='is_featured' value='1' checked> Yes                        
+          <input type="checkbox" name='is_featured' id='is_featured' value='1' checked> Yes
         </div>
               {{-- {{$categories}} --}}
 
@@ -56,6 +56,16 @@
                   <option value='{{$parent_cat->id}}'>{{$parent_cat->title}}</option>
               @endforeach --}}
           </select>
+        </div>
+
+        <div class="form-group">
+        <label for="collection_id">Collection <span class="text-danger">*</span></label>
+        <select name="collection_id" id="collection_id" class="form-control">
+            <option value="">--Select any collection--</option>
+            @foreach($collections as $key=>$collection_data)
+                <option value='{{$collection_data->id}}'>{{$collection_data->title}}</option>
+            @endforeach
+        </select>
         </div>
 
         <div class="form-group">
@@ -81,6 +91,7 @@
               <option value="M">Medium (M)</option>
               <option value="L">Large (L)</option>
               <option value="XL">Extra Large (XL)</option>
+              <option value="OS">One Size (OS)</option>
           </select>
         </div>
 
@@ -128,7 +139,7 @@
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
-        
+
         <div class="form-group">
           <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
           <select name="status" class="form-control">

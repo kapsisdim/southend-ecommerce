@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Collection;
 use App\Models\PostTag;
 use App\Models\PostCategory;
 use App\Models\Post;
@@ -19,7 +20,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
-   
+
     public function index(Request $request){
         return redirect()->route($request->user()->role);
     }
@@ -38,7 +39,7 @@ class FrontendController extends Controller
                 ->with('banners',$banners)
                 ->with('product_lists',$products)
                 ->with('category_lists',$category);
-    }   
+    }
 
     public function aboutUs(){
         return view('frontend.pages.about-us');
@@ -56,7 +57,7 @@ class FrontendController extends Controller
 
     public function productGrids(){
         $products=Product::query();
-        
+
         if(!empty($_GET['category'])){
             $slug=explode(',',$_GET['category']);
             // dd($slug);
@@ -85,7 +86,7 @@ class FrontendController extends Controller
             // return $price;
             // if(isset($price[0]) && is_numeric($price[0])) $price[0]=floor(Helper::base_amount($price[0]));
             // if(isset($price[1]) && is_numeric($price[1])) $price[1]=ceil(Helper::base_amount($price[1]));
-            
+
             $products->whereBetween('price',$price);
         }
 
@@ -99,12 +100,12 @@ class FrontendController extends Controller
         }
         // Sort by name , price, category
 
-      
+
         return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
     }
     public function productLists(){
         $products=Product::query();
-        
+
         if(!empty($_GET['category'])){
             $slug=explode(',',$_GET['category']);
             // dd($slug);
@@ -133,7 +134,7 @@ class FrontendController extends Controller
             // return $price;
             // if(isset($price[0]) && is_numeric($price[0])) $price[0]=floor(Helper::base_amount($price[0]));
             // if(isset($price[1]) && is_numeric($price[1])) $price[1]=ceil(Helper::base_amount($price[1]));
-            
+
             $products->whereBetween('price',$price);
         }
 
@@ -147,7 +148,7 @@ class FrontendController extends Controller
         }
         // Sort by name , price, category
 
-      
+
         return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
     }
     public function productFilter(Request $request){
@@ -222,6 +223,19 @@ class FrontendController extends Controller
         }
 
     }
+    public function productCollection(Request $request){
+        $products=Collection::getProductByCollection($request->slug);
+        // return $request->slug;
+        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
+
+        if(request()->is('e-shop.loc/product-grids')){
+            return view('frontend.pages.product-grids')->with('products',$products->products)->with('recent_products',$recent_products);
+        }
+        else{
+            return view('frontend.pages.product-lists')->with('products',$products->products)->with('recent_products',$recent_products);
+        }
+
+    }
     public function productCat(Request $request){
         $products=Category::getProductByCat($request->slug);
         // return $request->slug;
@@ -251,7 +265,7 @@ class FrontendController extends Controller
 
     public function blog(){
         $post=Post::query();
-        
+
         if(!empty($_GET['category'])){
             $slug=explode(',',$_GET['category']);
             // dd($slug);
@@ -422,5 +436,5 @@ class FrontendController extends Controller
                 return back();
             }
     }
-    
+
 }
