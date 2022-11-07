@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>E-SHOP || Login Page</title>
+  <title>Admin | Login Page</title>
   @include('backend.layouts.head')
 
 </head>
@@ -20,7 +20,7 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              
+
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
@@ -43,7 +43,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    
+
                     </div>
                     <div class="form-group">
                         <div class="form-check">
@@ -59,7 +59,7 @@
                     </button>
                   </form>
                   <hr>
-                   
+
                   <div class="text-center">
                     @if (Route::has('password.request'))
                         <a class="btn btn-link small" href="{{ route('password.request') }}">

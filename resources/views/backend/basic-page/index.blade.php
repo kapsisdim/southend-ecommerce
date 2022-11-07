@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','Admin | Brand Page')
+@section('title','Admin | Basic Page')
 @section('main-content')
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
@@ -9,19 +9,19 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Brand List</h6>
-      <a href="{{route('brand.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Brand</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Basic Pages List</h6>
+      <a href="{{route('basic-page.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Basic Page</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        @if(count($brands)>0)
-        <table class="table table-bordered" id="banner-dataTable" width="100%" cellspacing="0">
+        @if(count($basicPages)>0)
+        <table class="table table-bordered" id="basicPage-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
               <th>S.N.</th>
               <th>Title</th>
               <th>Slug</th>
-              <th>Status</th>
+              <th>Photo</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -30,29 +30,29 @@
               <th>S.N.</th>
               <th>Title</th>
               <th>Slug</th>
-              <th>Status</th>
+              <th>Photo</th>
               <th>Action</th>
               </tr>
           </tfoot>
           <tbody>
-            @foreach($brands as $brand)
+            @foreach($basicPages as $basicPage)
                 <tr>
-                    <td>{{$brand->id}}</td>
-                    <td>{{$brand->title}}</td>
-                    <td>{{$brand->slug}}</td>
+                    <td>{{$basicPage->id}}</td>
+                    <td>{{$basicPage->title}}</td>
+                    <td>{{$basicPage->slug}}</td>
                     <td>
-                        @if($brand->status=='active')
-                            <span class="badge badge-success">{{$brand->status}}</span>
+                        @if($basicPage->photo)
+                            <img src="{{$basicPage->photo}}" class="img-fluid zoom" style="max-width:80px" alt="{{$basicPage->photo}}">
                         @else
-                            <span class="badge badge-warning">{{$brand->status}}</span>
+                            <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid zoom" style="max-width:100%" alt="avatar.png">
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('brand.edit',$brand->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                        <form method="POST" action="{{route('brand.destroy',[$brand->id])}}">
+                        <a href="{{route('basic-page.edit',$basicPage->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        <form method="POST" action="{{route('basic-page.destroy',[$basicPage->id])}}">
                           @csrf
                           @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$brand->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$basicPage->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                     {{-- Delete Modal --}}
@@ -79,9 +79,9 @@
             @endforeach
           </tbody>
         </table>
-        <span style="float:right">{{$brands->links()}}</span>
+        <span style="float:right">{{$basicPages->links()}}</span>
         @else
-          <h6 class="text-center">No brands found!!! Please create brand</h6>
+          <h6 class="text-center">No Basic Pages found!!! Please create basic page</h6>
         @endif
       </div>
     </div>
@@ -120,7 +120,7 @@
             "columnDefs":[
                 {
                     "orderable":false,
-                    "targets":[3,4]
+                    "targets":[3,4,5]
                 }
             ]
         } );
