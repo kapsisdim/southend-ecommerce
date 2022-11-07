@@ -223,6 +223,20 @@
         </div>
       </div>
     </li>
+    <!-- Social -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#socialCollapse" aria-expanded="true" aria-controls="socialCollapse">
+        <i class="fas fa-fw fa-share"></i>
+        <span>Social</span>
+      </a>
+      <div id="socialCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#socialCollapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Social Options:</h6>
+          <a class="collapse-item" href="{{route('social.index')}}">Social List</a>
+          <a class="collapse-item" href="{{route('social.create')}}">Add Social</a>
+        </div>
+      </div>
+    </li>
     <!-- Policy -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#policyCollapse" aria-expanded="true" aria-controls="policyCollapse">
