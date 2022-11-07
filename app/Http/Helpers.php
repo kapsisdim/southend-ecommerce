@@ -1,6 +1,7 @@
 <?php
 use App\Models\Message;
 use App\Models\Category;
+use App\Models\Collection;
 use App\Models\PostTag;
 use App\Models\PostCategory;
 use App\Models\Order;
@@ -16,6 +17,11 @@ class Helper{
     public static function getAllCategory(){
         $category=new Category();
         $menu=$category->getAllParentWithChild();
+        return $menu;
+    }
+    public static function getAllCollection(){
+        $collection=new Collection();
+        $menu=$collection->getAllCollection();
         return $menu;
     }
 
@@ -60,11 +66,42 @@ class Helper{
         }
     }
 
+    public static function getHeaderCollection(){
+        $collection = new Collection();
+        // dd($category);
+        $menu=$collection->getAllCollection();
+
+        if($menu){
+            ?>
+
+            <li>
+            <a href="javascript:void(0);">COLLECTIONS</a></a>
+                <ul class="dropdown border-0 shadow">
+                <?php
+                    foreach($menu as $collection_info){
+                        ?>
+                            <li><a href="<?php echo route('product-collection',$collection_info->slug);?>"><?php echo $collection_info->title; ?></a></li>
+                        <?php
+                    }
+                    ?>
+                </ul>
+            </li>
+        <?php
+        }
+    }
+
     public static function productCategoryList($option='all'){
         if($option='all'){
             return Category::orderBy('id','DESC')->get();
         }
         return Category::has('products')->orderBy('id','DESC')->get();
+    }
+
+    public static function productCollectionList($option='all'){
+        if($option='all'){
+            return Collection::orderBy('id','DESC')->get();
+        }
+        return Collection::has('products')->orderBy('id','DESC')->get();
     }
 
     public static function postTagList($option='all'){

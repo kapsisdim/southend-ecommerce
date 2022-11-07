@@ -1,11 +1,12 @@
-<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-black sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
-      <div class="sidebar-brand-icon rotate-n-15">
+      <!-- <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-store"></i>
       </div>
-      <div class="sidebar-brand-text mx-3">ECOMMERCE</div>
+      <div class="sidebar-brand-text mx-3">ECOMMERCE</div> -->
+      <img style="height: 50px;" alt="Southend" src="/images/logo.svg" >
     </a>
 
     <!-- Divider -->
@@ -58,14 +59,29 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categoryCollapse" aria-expanded="true" aria-controls="categoryCollapse">
           <i class="fas fa-sitemap"></i>
-          <span>Category</span>
+          <span>Categories</span>
         </a>
         <div id="categoryCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Category Options:</h6>
-            <a class="collapse-item" href="{{route('category.index')}}">Category</a>
+            <a class="collapse-item" href="{{route('category.index')}}">Category List</a>
             <a class="collapse-item" href="{{route('category.create')}}">Add Category</a>
           </div>
+        </div>
+    </li>
+
+    <!-- Collections -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collectionCollapse" aria-expanded="true" aria-controls="collectionCollapse">
+        <i class="fas fa-sitemap"></i>
+        <span>Collections</span>
+        </a>
+        <div id="collectionCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Collection Options:</h6>
+            <a class="collapse-item" href="{{route('collection.index')}}">Collection List</a>
+            <a class="collapse-item" href="{{route('collection.create')}}">Add Collection</a>
+        </div>
         </div>
     </li>
     {{-- Products --}}
@@ -127,7 +143,7 @@
             <i class="fas fa-comments"></i>
             <span>Reviews</span></a>
     </li>
-    
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
