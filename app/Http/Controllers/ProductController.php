@@ -80,7 +80,6 @@ class ProductController extends Controller
         else{
             $data['size']='';
         }
-        // return $size;
         // return $data;
         $status=Product::create($data);
         if($status){
