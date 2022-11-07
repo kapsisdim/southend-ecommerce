@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Banner;
+use App\Models\Policy;
 use Illuminate\Support\Str;
 
-class BannerController extends Controller
+class PolicyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banner=Banner::orderBy('id','DESC')->paginate(10);
-        return view('backend.banner.index')->with('banners',$banner);
+        $policy=Policy::orderBy('id','DESC')->paginate(10);
+        return view('backend.policy.index')->with('policies',$policy);
     }
 
     /**
@@ -26,7 +26,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('backend.banner.create');
+        return view('backend.policy.create');
     }
 
     /**
@@ -41,25 +41,23 @@ class BannerController extends Controller
         $this->validate($request,[
             'title'=>'string|required|max:50',
             'description'=>'string|nullable',
-            'photo'=>'string|required',
-            'status'=>'required|in:active,inactive',
+            'type'=>'in:privacy,terms,cookies|required',
         ]);
         $data=$request->all();
         $slug=Str::slug($request->title);
-        $count=Banner::where('slug',$slug)->count();
+        $count=Policy::where('slug',$slug)->count();
         if($count>0){
             $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
         }
         $data['slug']=$slug;
-        // return $slug;
-        $status=Banner::create($data);
+        $status=Policy::create($data);
         if($status){
-            request()->session()->flash('success','Banner successfully added');
+            request()->session()->flash('success','Policy successfully added');
         }
         else{
-            request()->session()->flash('error','Error occurred while adding banner');
+            request()->session()->flash('error','Error occurred while adding policy');
         }
-        return redirect()->route('banner.index');
+        return redirect()->route('policy.index');
     }
 
     /**
@@ -81,8 +79,8 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        $banner=Banner::findOrFail($id);
-        return view('backend.banner.edit')->with('banner',$banner);
+        $policy=Policy::findOrFail($id);
+        return view('backend.policy.edit')->with('policy',$policy);
     }
 
     /**
@@ -94,29 +92,21 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $banner=Banner::findOrFail($id);
+        $policy=Policy::findOrFail($id);
         $this->validate($request,[
             'title'=>'string|required|max:50',
             'description'=>'string|nullable',
-            'photo'=>'string|required',
-            'status'=>'required|in:active,inactive',
+            'type'=>'in:privacy,terms,cookies|required',
         ]);
         $data=$request->all();
-        // $slug=Str::slug($request->title);
-        // $count=Banner::where('slug',$slug)->count();
-        // if($count>0){
-        //     $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
-        // }
-        // $data['slug']=$slug;
-        // return $slug;
-        $status=$banner->fill($data)->save();
+        $status=$policy->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Banner successfully updated');
+            request()->session()->flash('success','Policy successfully updated');
         }
         else{
-            request()->session()->flash('error','Error occurred while updating banner');
+            request()->session()->flash('error','Error occurred while updating policy');
         }
-        return redirect()->route('banner.index');
+        return redirect()->route('policy.index');
     }
 
     /**
@@ -127,14 +117,15 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        $banner=Banner::findOrFail($id);
-        $status=$banner->delete();
+        $policy=Policy::findOrFail($id);
+        $status=$policy->delete();
         if($status){
-            request()->session()->flash('success','Banner successfully deleted');
+            request()->session()->flash('success','Policy successfully deleted');
         }
         else{
-            request()->session()->flash('error','Error occurred while deleting banner');
+            request()->session()->flash('error','Error occurred while deleting policy');
         }
-        return redirect()->route('banner.index');
+        return redirect()->route('policy.index');
     }
+
 }

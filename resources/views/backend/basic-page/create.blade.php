@@ -1,11 +1,11 @@
 @extends('backend.layouts.master')
-@section('title','Admin | Banner Create')
+@section('title','Admin | Basic Page Create')
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Add Banner</h5>
+    <h5 class="card-header">Add Basic Page</h5>
     <div class="card-body">
-      <form method="post" action="{{route('banner.store')}}">
+      <form method="post" action="{{route('basic-page.store')}}">
         {{csrf_field()}}
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Title <span class="text-danger">*</span></label>
@@ -35,17 +35,6 @@
         </div>
         <div id="holder" style="margin-top:15px;max-height:100px;"></div>
           @error('photo')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
-
-        <div class="form-group">
-          <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
-          <select name="status" class="form-control">
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-          </select>
-          @error('status')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
